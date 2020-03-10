@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { NavController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class DataLocalService {
     private storage: Storage,
     private navCtrl: NavController,
     private inAppBrowser: InAppBrowser,
-    private file: File
+    private file: File,
+    private emailComposer: EmailComposer
   ) {
     this.cargarStorage();
   }
@@ -87,7 +89,23 @@ export class DataLocalService {
   async escribirEnArchivo( text: string ) {
     await this.file.writeExistingFile( this.file.dataDirectory, 'registros.csv', text);
 
-    console.log('Archivo creado');
-    console.log( this.file.dataDirectory + 'registros.csv');
+    // console.log('Archivo creado');
+    // console.log( this.file.dataDirectory + 'registros.csv');
+    const archivo = `${this.file.dataDirectory}registros.csv`;
+
+    const email = {
+      to: 'ramirex@gmail.com',
+      // cc: 'erika@mustermann.de',
+      // bcc: ['john@doe.com', 'jane@doe.com'],
+      attachments: [
+        archivo
+      ],
+      subject: 'BarCodeScans',
+      body: 'Backup de <strong>QRCode App</strong>',
+      isHtml: true
+    };
+    
+    // Send a text message using default options
+    this.emailComposer.open(email);
   }
 }
