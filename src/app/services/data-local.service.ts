@@ -49,4 +49,23 @@ export class DataLocalService {
       break;
     }
   }
+
+  enviarCorreo() {
+
+    const arrTemp = [];
+    const titulos = 'Tipo, Formato, Creado, Texto\n';
+
+    arrTemp.push( titulos );
+
+    this.guardados.forEach( registro => {
+      const linea = `${registro.type}, ${registro.format}, ${registro.created}, ${registro.text.replace(',', ' ')}\n`;
+      arrTemp.push(linea);
+    });
+
+    this.crearArchivoFisico(arrTemp.join(''));
+  }
+
+  crearArchivoFisico(text: string ) {
+    
+  }
 }

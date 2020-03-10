@@ -18,7 +18,7 @@ export class Tab2Page {
   }
 
   enviarCorreo()  {
-
+    this.dataLocalService.enviarCorreo();
   }
 
 }
