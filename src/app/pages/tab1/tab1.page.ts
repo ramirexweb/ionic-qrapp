@@ -29,7 +29,8 @@ export class Tab1Page {
         }
       }).catch( err => {
         console.log('Error: ', err);
-        this.dataLocalService.guardarRegistro('QRCode', 'https://ramirex.com');
+        //this.dataLocalService.guardarRegistro('QRCode', 'https://ramirex.com');
+        this.dataLocalService.guardarRegistro('QRCode', 'geo:40.73151796986687,-74.06087294062502');
       })
   }
 
